@@ -23,5 +23,6 @@
   <modules>
     <module>JDBC_HomeWork</module>
     <module>Transaction_HomeWork</module>
+    <module>DBCP_HomeWork</module>
   </modules>
 </project>
