@@ -22,5 +22,6 @@
 	</dependencyManagement>
   <modules>
     <module>JDBC_HomeWork</module>
+    <module>Transaction_HomeWork</module>
   </modules>
 </project>
