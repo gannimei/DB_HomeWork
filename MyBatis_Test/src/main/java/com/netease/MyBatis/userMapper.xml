@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netease.MyBatis.GetUserInfo">
+	<select id="GetUser" parameterType="int" resultType="com.netease.MyBatis.User">
+		select id,userName,crop from user where id=#{id}
+	</select>
+	<insert id="addUser" parameterType="com.netease.MyBatis.User" useGeneratedKeys="true" keyProperty="id">
+		insert into user(userName, crop) values(#{userName}, #{crop})
+	</insert>
+	<update id="updateUser" parameterType="com.netease.MyBatis.User">
+		update user set userName=#{userName}, crop=#{crop} where id=#{id}
+	</update>
+	<delete id="deleteUser" parameterType="int">
+		delete from user where id=#{id}
+	</delete>
+</mapper>
