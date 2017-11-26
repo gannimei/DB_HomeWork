@@ -1,4 +1,4 @@
-package com.netease.MyBatis;
+package com.netease.MyBatis_HomeWork;
 
 import java.io.InputStream;
 
@@ -6,21 +6,23 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class HelloMyBatis {
+public class MyBatisTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String resource = "conf.xml";
-		InputStream is = HelloMyBatis.class.getClassLoader().getResourceAsStream(resource);
+		InputStream is = MyBatisTest.class.getClassLoader().getResourceAsStream(resource);
 		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);
 		SqlSession sqlSession = sessionFactory.openSession();
 		try {
-			GetUserInfo getUserInfo = sqlSession.getMapper(GetUserInfo.class);
-			User user = getUserInfo.GetUser(1);
+			Op op = sqlSession.getMapper(Op.class);
+			User user = op.getUser(1);
 			System.out.println(user.getId() + " " + user.getUserName() + " ");
-			System.out.println(user.getCourses().get(0).getCourseName() + " ");
-			System.out.println(user.getCourses().get(0).getTeacher().getTeacherName());
-		} finally {
+			for(Integer productId : user.getProducts()) {
+				Product product = op.getProduct(productId);
+				System.out.println(product.getProductName());
+			}
+		}finally {
 			sqlSession.close();
 		}
 	}

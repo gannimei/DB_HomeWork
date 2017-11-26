@@ -1,43 +1,50 @@
 package com.netease.MyBatis;
 
+import java.util.List;
+
 public class User {
 
 	private int id;
 	private String userName;
-	private String crop;
-	
-	public User() {
-		
-	}
-	
-	public User(String userName, String crop) {
-		this.userName = userName;
-		this.crop = crop;
-	}
-	
-	public User(int id, String userName, String crop) {
+	private String corp;
+	private List<Course> courses;
+
+	public User(Integer id, String userName, String corp) {
 		this.id = id;
 		this.userName = userName;
-		this.crop = crop;
+		this.corp = corp;
 	}
-	
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getCrop() {
-		return crop;
+
+	public String getCorp() {
+		return corp;
 	}
-	public void setCrop(String crop) {
-		this.crop = crop;
+
+	public void setCorp(String corp) {
+		this.corp = corp;
 	}
-	
+
 }

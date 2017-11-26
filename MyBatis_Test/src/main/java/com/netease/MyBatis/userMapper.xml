@@ -2,16 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.netease.MyBatis.GetUserInfo">
-	<select id="GetUser" parameterType="int" resultType="com.netease.MyBatis.User">
-		select id,userName,crop from user where id=#{id}
+	<select id="GetUser" parameterType="int" resultMap="UserMap">
+		select u.id
+		as userId,userName,courseName,corp,c.id as courseId,teacher.id as teacherId,TeacherName from user u left
+		join UserCourse uc on u.id=uc.User_id left join Course c on
+		c.id=uc.Course_id left join teacher on teacher.id=c.Teacher_id where
+		u.id=#{id}
 	</select>
-	<insert id="addUser" parameterType="com.netease.MyBatis.User" useGeneratedKeys="true" keyProperty="id">
-		insert into user(userName, crop) values(#{userName}, #{crop})
-	</insert>
-	<update id="updateUser" parameterType="com.netease.MyBatis.User">
-		update user set userName=#{userName}, crop=#{crop} where id=#{id}
-	</update>
-	<delete id="deleteUser" parameterType="int">
-		delete from user where id=#{id}
-	</delete>
+	<resultMap type="com.netease.MyBatis.User" id="UserMap">
+		<constructor>
+			<idArg column="userId" javaType="int" />
+			<arg column="userName" javaType="String" />
+			<arg column="corp" javaType="String" />
+		</constructor>
+		<collection property="courses" ofType="com.netease.MyBatis.Course">
+			<id property="courseId" column="courseId" />
+			<result property="courseName" column="courseName" />
+			<association property="teacher" column="Teacher_id" javaType="com.netease.MyBatis.Teacher">
+				<id property="id" column="teacherId"></id>
+				<result property="TeacherName" column="TeacherName" />
+			</association>
+		</collection>
+	</resultMap>
 </mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netease.MyBatis_HomeWork.Op">
+	<select id="getUser" parameterType="int" resultMap="UserMap">
+		select u.ID as user_Id,UserName,Tel,ProductId from User u left join transaction t on u.ID=t.UserId where u.ID=#{id}
+	</select>
+	<resultMap id="UserMap" type="com.netease.MyBatis_HomeWork.User">
+		<id property="id" column="user_Id" />
+		<result property="userName" column="UserName" />
+		<result property="tel" column="Tel" />
+		<collection property="products" ofType="java.lang.Integer">
+			<result property="products" column="ProductId" />
+		</collection>
+	</resultMap>
+	<select id="getProduct" parameterType="int" resultType="com.netease.MyBatis_HomeWork.Product">
+		select * from Product where ID=#{id}
+	</select>
+</mapper>

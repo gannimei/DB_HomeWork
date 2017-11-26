@@ -26,5 +26,6 @@
     <module>DBCP_HomeWork</module>
     <module>SqlInject_HomeWork</module>
     <module>MyBatis_Test</module>
+    <module>MyBatis_HomeWork</module>
   </modules>
 </project>
